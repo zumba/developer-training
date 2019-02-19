@@ -1,0 +1,1 @@
+var bestServedCold = ['ice-cream'];
