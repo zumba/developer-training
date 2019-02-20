@@ -1,1 +1,1 @@
-var bestServedCold = ['ice-cream'];
+var bestServedCold = ['ice-cream', 'revenge'];
