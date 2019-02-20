@@ -1,0 +1,28 @@
+λ ~ dev list-containers
++---------------------+---------------------+---------+
+|       NAME          |        IPV4         |  STATE  |
++---------------------+---------------------+---------+
+| admin-development   | 10.66.66.166 (eth0) | RUNNING |
++---------------------+---------------------+---------+
+| api-development     | 10.66.66.15 (eth0)  | RUNNING |
++---------------------+---------------------+---------+
+| job-development     | 10.66.66.137 (eth0) | RUNNING |
++---------------------+---------------------+---------+
+| public-development  | 10.66.66.39 (eth0)  | RUNNING |
++---------------------+---------------------+---------+
+| service-development | 10.66.66.17 (eth0)  | RUNNING |
++---------------------+---------------------+---------+
+
+10.66.66.166 admin2.development.zumba.com #dev-managed
+10.66.66.166 admin-development #dev-managed
+10.66.66.1 guest lxdbr0 #dev-managed
+10.66.66.137 job-development #dev-managed
+10.66.66.17 service.development.zumba.com #dev-managed
+10.66.66.17 service-development #dev-managed
+10.66.66.39 www.development.zumba.com #dev-managed
+10.66.66.39 www-secure.development.zumba.com #dev-managed
+10.66.66.39 strong.development.zumba.com #dev-managed
+10.66.66.39 strong-secure.development.zumba.com #dev-managed
+10.66.66.39 public-development #dev-managed
+10.66.66.15 api.development.zumba.com #dev-managed
+10.66.66.15 api-development #dev-managed

@@ -1,0 +1,20 @@
+λ ~ dev ssh --command "ps -A | grep apache2"
+6709 ?        00:00:02 apache2
+6905 ?        00:00:02 apache2
+7160 ?        00:00:00 apache2
+... (abbreviated)
+
+λ ~ dev ssh --command "systemctl status apache2"
+● apache2.service
+Loaded: not-found (Reason: No such file or directory)
+Active: inactive (dead)
+
+λ ~ dev container-ssh \
+	--container public-development \
+	--command "systemctl status apache2"
+
+● apache2.service - LSB: Apache2 web server
+Loaded: loaded (/etc/init.d/apache2)
+Drop-In: /lib/systemd/system/apache2.service.d
+  └─apache2-systemd.conf
+  Active: active (running)

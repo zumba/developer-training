@@ -1,0 +1,116 @@
+import { Image, Appear } from "mdx-deck"
+import { future } from "mdx-deck/themes"
+import { CodeSurfer } from "mdx-deck-code-surfer"
+
+import dracula from "prism-react-renderer/themes/dracula"
+
+export const theme = {
+	...future,
+	codeSurfer: {
+		...dracula,
+		showNumbers: true
+	}
+}
+
+# Container Overview
+
+Chris Saylor
+
+@cjsaylor
+
+---
+
+## What is a container?
+
+* Runs processes in isolated kernal namespaces
+
+---
+
+<Image src="images/virtual-machine-setup.svg" size="75%" />
+
+---
+
+<Image src="images/lxc-setup.svg" size="75%"/>
+
+---
+
+<Image src="images/macbook-machine-setup.svg" size="75%" />
+
+---
+
+## Container vs VM
+
+* Containers run native linux processes
+* VMs <i>emulate</i> linux
+
+---
+
+<CodeSurfer
+	title="Where does apache2 run?"
+	code={require("!raw-loader!./snippets/where_is_apache.txt")}
+	lang="text"
+	showNumbers={true}
+	steps={[
+		{ range: [1, 5], notes: "The processes are on guest"},
+		{ range: [7, 10], notes: "There's no apache service on guest" },
+		{ range: [12, 20], notes: "It's \"running\" within the container" }
+	]}
+/>
+
+---
+
+What's happening in `create-environment`?
+
+<ul>
+	<Appear>
+		<li>Vagrant talks to VirtualBox to create a new VM (guest).</li>
+		<li>Installs all necessary software onto the guest (LXC, MySQL, MongoDB, etc)</li>
+	</Appear>
+</ul>
+
+---
+
+What's happening in `create-container`?
+
+```
+dev create-container --container public-development
+```
+
+<ul>
+	<Appear>
+		<li>Downloads a pre-built <strong>image</strong> from the image server.</li>
+		<li>Tells LXC on <code>guest</code> to create a container from the pre-built image.</li>
+		<li><code>/etc/hosts</code> is updated to route the app to the new container.</li>
+	</Appear>
+</ul>
+
+---
+
+<CodeSurfer
+	title="What's happening in `list-containers`?"
+	code={require("!raw-loader!./snippets/list_containers.txt")}
+	lang="text"
+	showNumbers={true}
+	steps={[
+		{ lines: [5, 16, 17]}
+	]}
+/>
+
+---
+
+What's happening in `container-ssh`?
+
+```
+dev container-ssh --container service-development
+```
+
+is analogous to:
+
+```
+vagrant ssh
+lxc exec service-development /bin/bash
+```
+
+---
+
+## Questions?
