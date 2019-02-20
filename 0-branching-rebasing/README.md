@@ -184,9 +184,11 @@ So what happened now?  Github rejected your push.  The reason this happened is b
 However, you know that you just deliberately rebased your branch, and you do want the branch in Github to be replaced with your new version.  To do that, you need to "force" the push.
 
 ```
-(REQ-99999-feature)$ git push origin REQ-99999-feature --force
+(REQ-99999-feature)$ git push origin REQ-99999-feature --force-with-lease
 ```
 
-This will be successful, and your pull request should now be ready to merge.
+As long as you specify the correct branch (an no one else is working on the same branch), this will be successful, and your pull request should now be ready to merge.
 
-***NOTE:*** This is the **only valid reason for you to force a push to github**.  Make sure you specify `origin your-branch-name` when you force push.  If you accidentally force push the wrong branch, you could be destroying work history of yourself or someone else on the team.  If you find yourself thinking that you need to force push for any other reason than rebasing a feature branch, check with your lead developer for help.
+If the command fails, that means either someone is pushing changes to your branch and they will be overwritten, or you accidentally specified the wrong branch.  If someone else is working using the same branch (not common), always communicate before attempting a rebase or force push as it will interrupt their work and they will need to re-checkout the branch.
+
+***NOTE:*** This is the **only valid reason for you to force a push to github**.  Make sure you specify `origin your-branch-name` when you force push, and always use `--force-with-lease`.  Avoid using other options to force push, `--force-with-lease` is like a "safer" force push.  It will stop the force push if there were any changes pushed by others on the same branch that would be destroyed by the push.  If you accidentally force push the wrong branch, if you do not use the safer `--force-with-lease` option, you could be destroying work history of yourself or someone else on the team.  If you find yourself thinking that you need to force push for any other reason than rebasing a feature branch, check with your lead developer for help.
