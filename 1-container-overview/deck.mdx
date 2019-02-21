@@ -96,7 +96,29 @@ dev create-container --container public-development
 ---
 
 <CodeSurfer
-	title="What's happening in `list-containers`?"
+	title={() => (
+		<p>Other <code color="code">create-container</code> options</p>
+	)}
+	code={
+	`dev create-container --container public-development \\
+	--no-prebuilt \\
+	--force \\
+	--grains xdebug\\
+	--build-app`
+	}
+	lang="text"
+	steps={[
+		{lines: [2], notes: "--no-prebuilt commands the salt server to build the image"},
+		{lines: [3], notes: "--force redownloads the prebuilt image"},
+		{lines: [4], notes: "--grains asks the salt server for additional packages"},
+		{lines: [5], notes: "--build-app Syncs local repo and builds the app"},
+	]}
+/>
+
+---
+
+<CodeSurfer
+	title={() => <span>What's happening in <code>list-containers</code>?</span>}
 	code={require("!raw-loader!./snippets/list_containers.txt")}
 	lang="bash"
 	showNumbers={true}
