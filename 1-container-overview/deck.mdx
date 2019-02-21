@@ -17,7 +17,7 @@ Chris Saylor
 
 ---
 
-<Image src="images/virtual-machine-setup.svg" size="75%" />
+<Image src={require("file-loader!./images/virtual-machine-setup.svg")} size="75%" />
 
 ```notes
 This is an example of how we currently run our aps on AWS ec2 instances
@@ -27,7 +27,7 @@ Hypervisor translates host-level OS commands to the Guest OS, which is one of th
 
 ---
 
-<Image src="images/lxc-setup.svg" size="75%"/>
+<Image src={require("file-loader!./images/lxc-setup.svg")} size="75%"/>
 
 ```notes
 This is an example of ideal world, where we can put separation between the apps and the host system without leaving the host system. The LXC layer does not translate OS commands, it simply manages the processes using cgroups.
@@ -35,7 +35,7 @@ This is an example of ideal world, where we can put separation between the apps 
 
 ---
 
-<Image src="images/macbook-machine-setup.svg" size="75%" />
+<Image src={require("file-loader!./images/macbook-machine-setup.svg")} size="75%" />
 
 ```notes
 Because our system is not a linux-based OS, we have to use a VM to get a linux system that then follows the container setup from the previous slide.
