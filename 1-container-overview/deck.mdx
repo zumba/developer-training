@@ -1,16 +1,7 @@
 import { Image, Appear } from "mdx-deck"
-import { future } from "mdx-deck/themes"
 import { CodeSurfer } from "mdx-deck-code-surfer"
 
-import dracula from "prism-react-renderer/themes/dracula"
-
-export const theme = {
-	...future,
-	codeSurfer: {
-		...dracula,
-		showNumbers: true
-	}
-}
+export { futureExtended as theme } from "../src/themes"
 
 # Container Overview
 
@@ -28,13 +19,27 @@ Chris Saylor
 
 <Image src="images/virtual-machine-setup.svg" size="75%" />
 
+```notes
+This is an example of how we currently run our aps on AWS ec2 instances
+
+Hypervisor translates host-level OS commands to the Guest OS, which is one of the reasons why containers are becomming popular. They eliminate the "translation" slow down.
+```
+
 ---
 
 <Image src="images/lxc-setup.svg" size="75%"/>
 
+```notes
+This is an example of ideal world, where we can put separation between the apps and the host system without leaving the host system. The LXC layer does not translate OS commands, it simply manages the processes using cgroups.
+```
+
 ---
 
 <Image src="images/macbook-machine-setup.svg" size="75%" />
+
+```notes
+Because our system is not a linux-based OS, we have to use a VM to get a linux system that then follows the container setup from the previous slide.
+```
 
 ---
 
@@ -48,7 +53,7 @@ Chris Saylor
 <CodeSurfer
 	title="Where does apache2 run?"
 	code={require("!raw-loader!./snippets/where_is_apache.txt")}
-	lang="text"
+	lang="bash"
 	showNumbers={true}
 	steps={[
 		{ range: [1, 5], notes: "The processes are on guest"},
@@ -56,6 +61,10 @@ Chris Saylor
 		{ range: [12, 20], notes: "It's \"running\" within the container" }
 	]}
 />
+
+```notes
+* Mention ssh goes to "guest"
+```
 
 ---
 
@@ -89,12 +98,16 @@ dev create-container --container public-development
 <CodeSurfer
 	title="What's happening in `list-containers`?"
 	code={require("!raw-loader!./snippets/list_containers.txt")}
-	lang="text"
+	lang="bash"
 	showNumbers={true}
 	steps={[
 		{ lines: [5, 16, 17]}
 	]}
 />
+
+```notes
+The section below is an exerpt of /etc/hosts
+```
 
 ---
 
