@@ -1,0 +1,20 @@
+{
+  "name": "edi-training",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "file-loader": "^3.0.1",
+    "mdx-deck": "^1.10.0",
+    "mdx-deck-code-surfer": "^0.5.5",
+    "raw-loader": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "mdx-deck deck.mdx",
+    "pdf": "mdx-deck pdf deck.mdx",
+    "build": "mdx-deck build deck.mdx"
+  },
+  "author": "Chris Saylor",
+  "license": "ISC"
+}

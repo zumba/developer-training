@@ -1,0 +1,144 @@
+export { futureExtended as theme } from "../src/themes"
+
+# EDI Overview
+
+Chris Saylor
+
+@cjsaylor
+
+---
+
+## What is EDI?
+
+_Electronic Data Interchange_
+
+Standard set of documents used for communicating with a warehouse logistics partner.
+
+```notes
+This doesn't mean the contents of the documents themselves are standard (as they do vary between providers), just that
+the numeric ID and name of the document are standard.
+```
+
+---
+
+## What is Netsuite?
+
+Netsuite is an ERP (Enterprise Resource Planner). It keeps track of inventory, orders, and accounting of both.
+
+```notes
+When working with EDI, you will encounter terms and concepts that are important to supply chain as well as accounting.
+```
+
+---
+
+## Types of Communication
+
+* Inventory
+* Orders
+* Returns
+
+---
+## Inventory
+### Item Maintenance (`888`)
+
+_AKA: Item Master_
+
+* Tells the warehouse information about the items that we want to interact with.
+* Basically an item database.
+
+```notes
+This is sourced from a Netsuite saved search. If an item has not been communicated via this item master, then subsequent
+documents acting on those items will fail.
+```
+
+---
+
+## Inventory
+### Warehouse Stock Transfer Shipment Advice (`943`)
+
+_aka: Shipment Pre-Advice_
+
+* Tells the warehouse that we will be sending items to the warehouse that should be entered into inventory.
+* Sourced from a Purchase Order or Transfer Order record in Netsuite.
+
+### Warehouse Stock Transfer Receipt Advice (`944`)
+
+* Warehouse tells us that they recieved the items sent via the corresponding `943`.
+* Creates an Item Receipt record in Netsuite.
+
+---
+
+## Inventory
+### Inventory Adjustment (`947`)
+
+Warehouse tells us that inventory had to be adjusted (lost item, damaged, etc).
+
+Creates an Inventory Adjustment record in Netsuite.
+
+---
+
+## Inventory Lifecycle
+
+`888`
+
+`943` -> `944`
+
+`947`
+
+---
+
+## Order Management
+### Shipment Authorization (`940`)
+
+Tells the warehouse to ship specific items to a location:
+
+* Customer
+* Another warehouse (Transfer Order)
+
+Sourced from a Netsuite Sales Order record.
+
+---
+
+## Order Management
+### Shipment Authorization Acknowledgement (`855`)
+
+Warehouse tells us that they recieved a corresponding `940` and are working on packaging.
+
+---
+
+## Order Management
+### Shipment Fulfillment (`945`)
+
+* Warehouse tells us that they shipped the items to the locations specified in the corresponding `940`.
+* Creates a Netsuite Item Fulfillment record on the Sales Order.
+* Can indicate short or over shipped items.
+* Can include a tracking number (UPS, Fedex, etc)
+
+---
+
+## Order Lifecycle
+
+`940` -> `855` -> `945`
+
+---
+
+## Returns
+### Return Authorization (`180`)
+
+Tells the warehouse that we are authorizing a return from a customer with specific items.
+
+### Return Notification
+
+Warehouse tells us that they received a return from corresponding RMA `180`.
+
+---
+
+## Versteijnen communication
+
+* Communication occurs over FTP
+* Filenames indicate the type of EDI document.
+* Most handling is in `zumba/netsuite` under an `APL` and `Ext3PL` nomenclature.
+
+---
+
+## Questions?
